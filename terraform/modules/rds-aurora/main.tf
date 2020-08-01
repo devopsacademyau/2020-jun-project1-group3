@@ -1,16 +1,17 @@
 # Expects master user name and password to be stored in secrets manager
 data "aws_secretsmanager_secret" "master_username" {
-  name = "doa-rds-aurora-serverless-master-username"
+  name = "prod/doa/aurora/admin/username"
 }
 
 data "aws_secretsmanager_secret" "master_password" {
-  name = "doa-rds-aurora-serverless-master-pw"
+  name = "prod/doa/aurora/admin/password"
 }
 
 # Subnets for RDS to be present
 resource "aws_db_subnet_group" "aurora_subnet_group" {
   name       = "aurora-subnets"
-  subnet_ids = [var.rds_aurora_subnets]
+  for_each   = toset(var.rds_aurora_subnets)
+  subnet_ids = [each.value]
 }
 
 # Deploys a RDS Aurora serverless cluster
@@ -22,10 +23,9 @@ resource "aws_rds_cluster" "aurora_mysql_serverless" {
   master_username         = data.aws_secretsmanager_secret.master_username.id
   master_password         = data.aws_secretsmanager_secret.master_password.id
   backup_retention_period = var.backup_retention_period
-  replica_scale_enabled   = var.replica_scale_enabled
-  vpc_id                  = var.vpc_id
-  instance_type           = var.instance_type
-  vpc_security_group_ids  = [var.vpc_security_group_ids]
+  for_each                = toset(var.vpc_security_group_ids)
+  vpc_security_group_ids  = [each.value]
+  availability_zones      = [for az in var.availability_zones: az]
   storage_encrypted       = true
 
   scaling_configuration {

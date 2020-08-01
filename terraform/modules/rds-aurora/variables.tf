@@ -31,15 +31,13 @@ variable "backup_retention_period" {
   default     = 1
 }
 
-variable "replica_scale_enabled" {
-  type        = bool
-  description = "Create replicas or not"
-  default     = false
-}
-
 variable "instance_type" {
   type        = string
   description = "Underlying instance types for the RDS cluster"
   default     = "db.t2.small"
 }
 
+variable "availability_zones" {
+  type    = list(string)
+  default = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
+}
