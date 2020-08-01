@@ -2,3 +2,6 @@
 output "vpc-module" {
   value = module.vpc
 }
+output "ecr-module" {
+  value = module.ecr
+}
