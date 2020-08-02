@@ -17,9 +17,3 @@
 - Database need to be accessible from public EC2 running on public subnets
 - GitHub can't have any secrets commited.
 
-## This module expects following two secrets in AWS Secrets Manager
-
-| Secret Name | Description |
-| ----------- | ----------- |
-| doa-rds-aurora-serverless-master-username | Aurora master username |
-| doa-rds-aurora-serverless-master-pw | Aurora master password |
