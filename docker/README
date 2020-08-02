@@ -1,0 +1,23 @@
+Instructions -> Add to documentation later
+
+Build and Push Wordpress container to the cloud.
+
+Requirements:
+
+Docker
+Make
+AWS CLI logged in
+Jq
+
+1. ECR Login
+
+make login
+
+
+2. Build
+
+make build
+
+
+3. Push
+make push
