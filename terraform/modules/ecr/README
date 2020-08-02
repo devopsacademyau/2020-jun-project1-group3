@@ -4,11 +4,11 @@ Instructions:
 
 1. After apply terraform get the repository URL
 
-terraform output | grep repository_url
+terraform output -json ecr-module | jq .ecr | jq .repository_url
 
 2. Store the url in a variable
 
-repository_url=<Repo URL>
+repository_url=$(terraform output -json ecr-module | jq .ecr | jq .repository_url)
 
 3. Retrieve an authentication token and authenticate your Docker client to your registry. Use AWS CLI
 
