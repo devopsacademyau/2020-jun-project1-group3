@@ -3,7 +3,7 @@ resource "aws_ecs_cluster" "webapp-ecs" {
 }
 
 data "template_file" "webapp-template" {
-   template = file("/Users/vanithak/Terraform/devops-project-group3/webapp-tpl.json")
+   template = file("./webapp-tpl.json")
 
   vars = {
     app_image      = var.app_image
