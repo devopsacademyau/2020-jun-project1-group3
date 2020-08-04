@@ -28,7 +28,7 @@ resource "aws_ecs_service" "ecs-service" {
   name            = "webapp-ecs-service"
   cluster         = aws_ecs_cluster.webapp-ecs.id
   task_definition = aws_ecs_task_definition.ecs-taskdef.arn
-  desired_count   = 1
+  desired_count   = var.app_count
   launch_type     = "FARGATE"
  
   network_configuration {
