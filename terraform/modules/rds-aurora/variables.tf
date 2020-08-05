@@ -70,9 +70,10 @@ variable "aurora_port" {
   default = 3306
 }
 
+# TODO: read this from data
 variable "availability_zones" {
   type    = list(string)
-  default = ["ap-southeast-2a", "ap-southeast-2b", "ap-southeast-2c"]
+  default = ["ap-southeast-2a", "ap-southeast-2b"]
 }
 
 variable "auto_pause" {

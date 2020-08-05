@@ -5,13 +5,18 @@ variable "aws_region" {
   default = "ap-southeast-2"
 }
 
-variable "CIDRBlock" {
-  description = "VPC network"
-  default     = "20.0.0.0/16"
+variable "vpc_cidr" {
+  type    = string
+  default = "10.0.0.0/16"
 }
 
 variable "repository_name" {
   description = "the name of the ECR repository to be created."
   type        = string
   default     = "wp-project3"
+}
+
+variable "ssh_allowed_cidr" {
+  type    = string
+  default = "121.200.5.90/32"
 }

@@ -1,20 +1,39 @@
-# Variables for the entire stack goes here.
+# Main integration of all the terraform modules
 
-module "vpc" {
-  source    = "./modules/vpc"
-  CIDRBlock = var.CIDRBlock
+module "networking" {
+  source           = "./modules/networking"
+  vpc_cidr         = var.vpc_cidr
+  ssh_allowed_cidr = var.ssh_allowed_cidr
 }
-  
-  module "ecr" {
+
+module "efs" {
+  source              = "./modules/efs"
+  vpc_id              = module.networking.vpc_id
+  private_subnet_cidr = [for subnet in module.networking.private_subnets : subnet.cidr_block]
+  private_subnet_ids  = [for subnet in module.networking.private_subnets : subnet.id]
+
+}
+
+module "rds_aurora" {
+  source             = "./modules/rds-aurora"
+  vpc_id             = module.networking.vpc_id
+  rds_aurora_subnets = [for subnet in module.networking.private_subnets : subnet.id]
+}
+
+module "loadbalancer" {
+  source = "./modules/loadbalancer"
+  #project       = "grp3wordpress"
+  vpc_id  = module.networking.vpc_id
+  subnets = [for subnet in module.networking.private_subnets : subnet.id]
+  #https_enabled = true
+}
+
+module "ecr" {
   source          = "./modules/ecr"
   repository_name = var.repository_name
 }
 
-module "loadbalancer" {
-  source        = "./modules/loadbalancer"
-  #project       = "grp3wordpress"
-  vpc_id        = module.vpc.vpc_id
-  subnets       = module.vpc.public_subnets[*].id
-  #https_enabled = true
- }
+# module "ecs" {
+#   source = "./modules/ecs"
 
+# }
