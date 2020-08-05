@@ -4,12 +4,12 @@ locals {
 }
 
 resource "aws_lb" "this" {
-  name               = "wordpress-lb"
-  internal           = false
-  load_balancer_type = "application"
-  subnets            = var.subnets
+  name                       = "wordpress-lb"
+  internal                   = false
+  load_balancer_type         = "application"
+  subnets                    = var.subnets
   enable_deletion_protection = true
-  
+
   tags = {
     Name = "wordpress-lb"
   }
