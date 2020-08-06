@@ -1,6 +1,10 @@
 locals {
-  targetPort     = 443
-  targetProtocol = "HTTPS"
+  #  Waiting for a valid acm certificate
+  #  targetPort     = 443
+  #  targetProtocol = "HTTPS"
+  #  Let's test with http only
+  targetPort     = 80
+  targetProtocol = "HTTP"
 }
 
 resource "aws_lb" "this" {
@@ -8,7 +12,7 @@ resource "aws_lb" "this" {
   internal                   = false
   load_balancer_type         = "application"
   subnets                    = var.subnets
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     Name = "wordpress-lb"
