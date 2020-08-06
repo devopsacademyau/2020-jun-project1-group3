@@ -1,9 +1,3 @@
-# Generate database master username and password
-resource "random_string" "username" {
-  length  = 10
-  special = false
-}
-
 resource "random_password" "password" {
   length           = 16
   special          = true
@@ -47,7 +41,7 @@ resource "aws_rds_cluster" "aurora_mysql_serverless" {
   engine_mode             = var.engine_mode
   engine_version          = var.engine_version
   database_name           = var.db_name
-  master_username         = random_string.username.result
+  master_username         = var.db_user
   master_password         = random_password.password.result
   backup_retention_period = var.backup_retention_period
   vpc_security_group_ids  = [aws_security_group.aurora_sg.id]
@@ -78,7 +72,7 @@ resource "aws_ssm_parameter" "aurora_username" {
   name        = var.db_user_parameter_name
   description = "RDS aurora username"
   type        = "SecureString"
-  value       = random_string.username.result
+  value       = var.db_user
   overwrite   = true
 }
 
@@ -95,4 +89,5 @@ resource "aws_ssm_parameter" "aurora_db_name" {
   description = "RDS aurora db name"
   type        = "SecureString"
   value       = var.db_name
+  overwrite   = true
 }
