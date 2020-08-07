@@ -5,12 +5,22 @@ variable "aws_region" {
 
 variable "CIDRBlock" {
   description = "The CIDR of the main vpc"
-  default = "20.0.0.0/16"
+  default     = "20.0.0.0/16"
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID for the ECS cluster"
+}
+
+variable "subnets" {
+  description = "public subnets"
+  type        = list(string)
 }
 
 variable "ecs_task_execution_role_name" {
   description = "ECS task execution role name"
-  default = "myEcsTaskExecutionRole"
+  default     = "WebappEcsTaskExecutionRole"
 }
 
 variable "az_count" {
