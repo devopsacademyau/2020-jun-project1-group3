@@ -20,20 +20,21 @@ module "rds_aurora" {
   rds_aurora_subnets = [for subnet in module.networking.private_subnets : subnet.id]
 }
 
-module "loadbalancer" {
-  source = "./modules/loadbalancer"
-  #project       = "grp3wordpress"
-  vpc_id  = module.networking.vpc_id
-  subnets = [for subnet in module.networking.private_subnets : subnet.id]
-  #https_enabled = true
-}
+#module "loadbalancer" {
+#source = "./modules/loadbalancer"
+#project       = "grp3wordpress"
+#vpc_id  = module.networking.vpc_id
+#subnets = [for subnet in module.networking.private_subnets : subnet.id]
+##https_enabled = true
+#}
 
 module "ecr" {
   source          = "./modules/ecr"
   repository_name = var.repository_name
 }
 
-# module "ecs" {
-#   source = "./modules/ecs"
-
-# }
+module "ecs" {
+  source      = "./modules/ecs"
+  vpc_id      = module.networking.vpc_id
+  subnets     = [for subnet in module.networking.private_subnets : subnet.id]
+}
