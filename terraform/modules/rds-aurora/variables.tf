@@ -34,9 +34,9 @@ variable "db_name" {
 }
 
 variable "db_user" {
-  type = string
+  type        = string
   description = "db_username for the application"
-  default = "admin"
+  default     = "admin"
 }
 
 variable "db_parameter_name" {

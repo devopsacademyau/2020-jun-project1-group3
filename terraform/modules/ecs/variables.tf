@@ -3,24 +3,29 @@ variable "aws_region" {
   default     = "ap-southeast-2"
 }
 
-variable "CIDRBlock" {
-  description = "The CIDR of the main vpc"
-  default     = "20.0.0.0/16"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the ECS cluster"
 }
 
-variable "subnets" {
-  description = "public subnets"
+variable "private_subnets" {
+  description = "private subnet id list"
+  type        = list(string)
+}
+
+variable "public_subnets" {
+  description = "public subnet id list"
   type        = list(string)
 }
 
 variable "ecs_task_execution_role_name" {
   description = "ECS task execution role name"
-  default     = "WebappEcsTaskExecutionRole"
+  default     = "webapp-ecs-task-execution-role"
+}
+
+variable "ecs_task_role_name" {
+  description = "ECS task role name"
+  default     = "webapp-ecs-task-role"
 }
 
 variable "az_count" {
@@ -55,4 +60,12 @@ variable "fargate_cpu" {
 variable "fargate_memory" {
   description = "Fargate instance memory to provision (in MiB)"
   default     = "512"
+}
+
+variable "efs_access_point" {
+  type = string
+}
+
+variable "efs_id" {
+  type = string
 }

@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "project3_ecr" {
-  name = var.repository_name
+  name                 = var.repository_name
   image_tag_mutability = "IMMUTABLE"
 
   image_scanning_configuration {

@@ -18,10 +18,13 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# Elastic IP for the NAT GW
+# Elastic IPs for the NAT gateways
 resource "aws_eip" "nat_eip" {
+  count      = var.number_of_subnets
+  vpc        = true
+  depends_on = [aws_internet_gateway.igw]
   tags = {
-    "Name" = "${var.project}-nat-eip"
+    "Name" = "${var.project}-nat-eip-${count.index}"
   }
 }
 
@@ -49,13 +52,14 @@ resource "aws_subnet" "private_subnet" {
   }
 }
 
-# Create a single NAT Gateway in first public subnet
+# Create NAT Gateways in all the public subnets
 resource "aws_nat_gateway" "nat_gw" {
-  allocation_id = aws_eip.nat_eip.id
-  subnet_id     = aws_subnet.public_subnet[0].id
+  count         = var.number_of_subnets
+  allocation_id = aws_eip.nat_eip[count.index].id
+  subnet_id     = aws_subnet.public_subnet[count.index].id
   depends_on    = [aws_internet_gateway.igw]
   tags = {
-    "Name" = "${var.project}-nat-gw"
+    "Name" = "${var.project}-nat-gw-${count.index}"
   }
 }
 
@@ -71,28 +75,31 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
+# Need one per private subnet to route each outbound
+# traffic to its own NAT gateway
 resource "aws_route_table" "private_route_table" {
+  count  = var.number_of_subnets
   vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat_gw.id
+    nat_gateway_id = aws_nat_gateway.nat_gw[count.index].id
   }
   tags = {
-    "Name" = "${var.project}-private-rt"
+    "Name" = "${var.project}-private-rt-${count.index}"
   }
 }
 
 resource "aws_route_table_association" "public" {
-  count          = length(aws_subnet.public_subnet)
+  count          = var.number_of_subnets
   subnet_id      = aws_subnet.public_subnet[count.index].id
   route_table_id = aws_route_table.public_route_table.id
 }
 
 resource "aws_route_table_association" "private" {
-  count          = length(aws_subnet.private_subnet)
+  count          = var.number_of_subnets
   subnet_id      = aws_subnet.private_subnet[count.index].id
-  route_table_id = aws_route_table.private_route_table.id
+  route_table_id = aws_route_table.private_route_table[count.index].id
 }
 
 resource "aws_network_acl" "private_nacl" {

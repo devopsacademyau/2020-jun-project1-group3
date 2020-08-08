@@ -34,7 +34,10 @@ module "ecr" {
 }
 
 module "ecs" {
-  source      = "./modules/ecs"
-  vpc_id      = module.networking.vpc_id
-  subnets     = [for subnet in module.networking.private_subnets : subnet.id]
+  source           = "./modules/ecs"
+  vpc_id           = module.networking.vpc_id
+  efs_access_point = module.efs.efs_access_point_id
+  efs_id           = module.efs.efs_id
+  public_subnets   = [for subnet in module.networking.public_subnets : subnet.id]
+  private_subnets  = [for subnet in module.networking.private_subnets : subnet.id]
 }

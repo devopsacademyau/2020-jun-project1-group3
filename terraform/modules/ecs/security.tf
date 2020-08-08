@@ -1,9 +1,8 @@
 # ALB Security Group
 
-resource "aws_security_group" "alb-sg" {
-  name        = "webapp-load-balancer-security-group"
-  description = "ALB Security group access from Internet"
-  vpc_id      = var.vpc_id
+resource "aws_security_group" "alb_sg" {
+  name   = "webapp_alb_sg"
+  vpc_id = var.vpc_id
 
   ingress {
     protocol    = "tcp"
@@ -21,9 +20,8 @@ resource "aws_security_group" "alb-sg" {
 }
 
 # TRAFFIC FROM ALB TO ECS
-
-resource "aws_security_group" "fargate-sg" {
-  name        = "webapp-fargate-security-group"
+resource "aws_security_group" "fargate_sg" {
+  name        = "webapp_ecs_sg"
   description = "Allow access only from ALB"
   vpc_id      = var.vpc_id
 
@@ -31,7 +29,7 @@ resource "aws_security_group" "fargate-sg" {
     protocol        = "tcp"
     from_port       = var.app_port
     to_port         = var.app_port
-    security_groups = [aws_security_group.alb-sg.id]
+    security_groups = [aws_security_group.alb_sg.id]
   }
 
   egress {
