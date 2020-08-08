@@ -4,6 +4,6 @@ resource "aws_cloudwatch_log_group" "webapp_log_group" {
 }
 
 resource "aws_cloudwatch_log_stream" "webapp_log_stream" {
-  name           = "webapp_log_stream"
+  name           = "webapp"
   log_group_name = aws_cloudwatch_log_group.webapp_log_group.name
 }

@@ -39,26 +39,6 @@ variable "db_user" {
   default     = "admin"
 }
 
-variable "db_parameter_name" {
-  type    = string
-  default = "/wordpress/WORDPRESS_DB_NAME"
-}
-
-variable "db_host_parameter_name" {
-  type    = string
-  default = "/wordpress/WORDPRESS_DB_HOST"
-}
-
-variable "db_user_parameter_name" {
-  type    = string
-  default = "/wordpress/WORDPRESS_DB_USER"
-}
-
-variable "db_pw_parameter_name" {
-  type    = string
-  default = "/wordpress/WORDPRESS_DB_PASSWORD"
-}
-
 variable "backup_retention_period" {
   type        = number
   description = "Reteintion days for backups"

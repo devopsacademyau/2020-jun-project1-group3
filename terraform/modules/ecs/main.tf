@@ -53,7 +53,9 @@ resource "aws_ecs_service" "webapp_ecs_service" {
   desired_count    = var.app_count
   launch_type      = "FARGATE"
   platform_version = "1.4.0"
-
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
   network_configuration {
     security_groups = [aws_security_group.fargate_sg.id]
     subnets         = [for id in var.private_subnets : id]
@@ -65,5 +67,5 @@ resource "aws_ecs_service" "webapp_ecs_service" {
     container_port   = var.app_port
   }
 
-  depends_on = [aws_iam_role_policy_attachment.attach_ecs_task_execution_role, aws_iam_role_policy_attachment.attach_ecs_task_role]
+  depends_on = [aws_alb_listener.front_end, aws_iam_role_policy_attachment.attach_ecs_task_execution_role, aws_iam_role_policy_attachment.attach_ecs_task_role]
 }
