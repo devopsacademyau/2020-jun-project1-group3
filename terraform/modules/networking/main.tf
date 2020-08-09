@@ -111,25 +111,16 @@ resource "aws_network_acl" "private_nacl" {
     protocol   = -1
     rule_no    = 100
     action     = "allow"
-    cidr_block = aws_vpc.vpc.cidr_block
+    cidr_block = "0.0.0.0/0"
     from_port  = 0
     to_port    = 0
-  }
-
-  ingress {
-    protocol   = "tcp"
-    rule_no    = 200
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 1024
-    to_port    = 65535
   }
 
   egress {
     protocol   = -1
     rule_no    = 100
     action     = "allow"
-    cidr_block = aws_vpc.vpc.cidr_block
+    cidr_block = "0.0.0.0/0"
     from_port  = 0
     to_port    = 0
   }
