@@ -1,6 +1,6 @@
 TAG ?= $(shell git rev-parse --short HEAD)
 REPO_URL ?= $(shell cd ../terraform&&terraform output -json ecr_module | jq .ecr | jq -r .repository_url)
-#CONTAINER_NAME ?= wppj3
+CONTAINER_NAME ?= webapp
 
 .PHONY: login
 login:
