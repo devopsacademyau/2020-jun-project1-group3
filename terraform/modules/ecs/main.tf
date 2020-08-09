@@ -35,6 +35,13 @@ resource "aws_ecs_task_definition" "webapp_ecs_taskdef" {
           "awslogs-stream-prefix": "ecs"
         }
     },
+    "essential": true,
+    "mountPoints": [
+      {
+        "containerPath": "/",
+        "sourceVolume": "webapp_efs"
+      }
+    ],
     "portMappings": [
       {
         "containerPort": ${var.app_port},

@@ -61,6 +61,12 @@ resource "aws_rds_cluster" "aurora_mysql_serverless" {
     seconds_until_auto_pause = var.seconds_until_auto_pause
     timeout_action           = var.timeout_action
   }
+
+  lifecycle {
+    ignore_changes = [
+      engine_version
+    ]
+  }
 }
 
 # # Store RDS info in parameter store
