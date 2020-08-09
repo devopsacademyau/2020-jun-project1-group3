@@ -20,3 +20,8 @@ variable "ssh_allowed_cidr" {
   type    = string
   default = "121.200.5.90/32"
 }
+
+variable "app_image" {
+  type    = string
+  default = "wp-project3"
+}

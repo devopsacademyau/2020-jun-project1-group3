@@ -16,3 +16,13 @@ build:
 push:
 	@echo "Pushing container..."
 	docker push ${REPO_URL}:${TAG}
+
+.PHONY: publish
+publish:
+	@echo "Pushing container..."
+	docker push ${REPO_URL}:${TAG}
+
+.PHONY: deploy-wp
+deploy-wp:
+	@echo "Deploying Wordpress customized image..."
+	cd ../terraform&&terraform apply -var 'app_image=${REPO_URL}'

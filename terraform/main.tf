@@ -48,4 +48,5 @@ module "ecs" {
   efs_id           = module.efs.efs_id
   public_subnets   = [for subnet in module.networking.public_subnets : subnet.id]
   private_subnets  = [for subnet in module.networking.private_subnets : subnet.id]
+  app_image        = module.ecr.ecr.repository_url
 }
