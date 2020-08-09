@@ -12,10 +12,3 @@ variable "project" {
   type    = string
   default = "pj-01-gp-03"
 }
-
-# Using this count to create subnets
-variable "number_of_subnets" {
-  type        = number
-  description = "Desired number of subnets."
-  default     = 2
-}

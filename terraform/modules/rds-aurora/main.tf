@@ -1,3 +1,8 @@
+# Read availability zones
+data "aws_availability_zones" "aws_az" {
+  state = "available"
+}
+
 resource "random_password" "password" {
   length  = 16
   special = false
@@ -45,7 +50,7 @@ resource "aws_rds_cluster" "aurora_mysql_serverless" {
   backup_retention_period = var.backup_retention_period
   vpc_security_group_ids  = [aws_security_group.aurora_sg.id]
   db_subnet_group_name    = aws_db_subnet_group.aurora_subnet_group.id
-  availability_zones      = [for az in var.availability_zones : az]
+  availability_zones      = [for az in data.aws_availability_zones.aws_az.names : az]
   storage_encrypted       = true
   skip_final_snapshot     = var.skip_final_snapshot
 
