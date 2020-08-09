@@ -19,5 +19,9 @@ make login
 make build
 
 
-3. Push
-make push
+3. Publish
+make publish
+
+4. deploy-wp
+
+make deploy-wp
