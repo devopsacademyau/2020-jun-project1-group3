@@ -69,3 +69,19 @@ variable "efs_access_point" {
 variable "efs_id" {
   type = string
 }
+
+variable "rds_endpoint" {
+  type = string
+}
+
+variable "rds_database_name" {
+  type = string
+}
+
+variable "rds_database_username" {
+  type = string
+}
+
+variable "rds_database_password" {
+  type = string
+}

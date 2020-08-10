@@ -28,25 +28,21 @@ module "ssm" {
   rds_database_password = module.rds_aurora.rds_database_password
 }
 
-#module "loadbalancer" {
-#source = "./modules/loadbalancer"
-#project       = "grp3wordpress"
-#vpc_id  = module.networking.vpc_id
-#subnets = [for subnet in module.networking.private_subnets : subnet.id]
-##https_enabled = true
-#}
-
 module "ecr" {
   source          = "./modules/ecr"
   repository_name = var.repository_name
 }
 
 module "ecs" {
-  source           = "./modules/ecs"
-  vpc_id           = module.networking.vpc_id
-  efs_access_point = module.efs.efs_access_point_id
-  efs_id           = module.efs.efs_id
-  public_subnets   = [for subnet in module.networking.public_subnets : subnet.id]
-  private_subnets  = [for subnet in module.networking.private_subnets : subnet.id]
-  app_image        = module.ecr.ecr.repository_url
+  source                = "./modules/ecs"
+  vpc_id                = module.networking.vpc_id
+  efs_access_point      = module.efs.efs_access_point_id
+  efs_id                = module.efs.efs_id
+  public_subnets        = [for subnet in module.networking.public_subnets : subnet.id]
+  private_subnets       = [for subnet in module.networking.private_subnets : subnet.id]
+  app_image             = module.ecr.ecr.repository_url
+  rds_endpoint          = module.ssm.rds_cluster_endpoint_param
+  rds_database_name     = module.ssm.rds_cluster_database_name_param
+  rds_database_username = module.ssm.rds_cluster_database_user_param
+  rds_database_password = module.ssm.rds_cluster_database_user_pw_param
 }

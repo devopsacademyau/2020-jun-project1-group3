@@ -1,19 +1,3 @@
-data "aws_ssm_parameter" "db_host" {
-  name = "/wordpress/WORDPRESS_DB_HOST"
-}
-
-data "aws_ssm_parameter" "db_name" {
-  name = "/wordpress/WORDPRESS_DB_NAME"
-}
-
-data "aws_ssm_parameter" "db_user" {
-  name = "/wordpress/WORDPRESS_DB_USER"
-}
-
-data "aws_ssm_parameter" "db_password" {
-  name = "/wordpress/WORDPRESS_DB_PASSWORD"
-}
-
 resource "aws_ecs_cluster" "webapp_ecs" {
   name = "webapp-cluster"
 }
@@ -59,22 +43,22 @@ resource "aws_ecs_task_definition" "webapp_ecs_taskdef" {
           "awslogs-stream-prefix" : "ecs"
         }
       }
-      "environment" : [
+      "secrets" : [
         {
           "name" : "WORDPRESS_DB_HOST",
-          "value" : data.aws_ssm_parameter.db_host.value
+          "valueFrom" : var.rds_endpoint
         },
         {
           "name" : "WORDPRESS_DB_USER",
-          "value" : data.aws_ssm_parameter.db_user.value
+          "valueFrom" : var.rds_database_username
         },
         {
           "name" : "WORDPRESS_DB_PASSWORD",
-          "value" : data.aws_ssm_parameter.db_password.value
+          "valueFrom" : var.rds_database_password
         },
         {
           "name" : "WORDPRESS_DB_NAME",
-          "value" : data.aws_ssm_parameter.db_name.value
+          "valueFrom" : var.rds_database_username
         }
       ]
     }
