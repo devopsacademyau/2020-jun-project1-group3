@@ -1,4 +1,4 @@
-TAG ?= $(shell git rev-parse --short HEAD)
+TAG ?= latest
 REPO_URL ?= $(shell cd ../terraform&&terraform output -json ecr_module | jq .ecr | jq -r .repository_url)
 CONTAINER_NAME ?= webapp
 
@@ -25,4 +25,4 @@ publish:
 .PHONY: deploy-wp
 deploy-wp:
 	@echo "Deploying Wordpress customized image..."
-	cd ../terraform&&terraform apply -var 'app_image=${REPO_URL}'
+	cd ../terraform&&terraform apply -var 'app_image=${REPO_URL}:${TAG}'

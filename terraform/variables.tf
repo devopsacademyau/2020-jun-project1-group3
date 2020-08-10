@@ -25,3 +25,8 @@ variable "app_image" {
   type    = string
   default = "wp-project3"
 }
+
+variable "image_tag" {
+  type = string
+  default = "latest"
+}

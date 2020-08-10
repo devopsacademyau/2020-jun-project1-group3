@@ -40,7 +40,7 @@ module "ecs" {
   efs_id                = module.efs.efs_id
   public_subnets        = [for subnet in module.networking.public_subnets : subnet.id]
   private_subnets       = [for subnet in module.networking.private_subnets : subnet.id]
-  app_image             = module.ecr.ecr.repository_url
+  app_image             = "${module.ecr.ecr.repository_url}:${var.image_tag}"
   rds_endpoint          = module.ssm.rds_cluster_endpoint_param
   rds_database_name     = module.ssm.rds_cluster_database_name_param
   rds_database_username = module.ssm.rds_cluster_database_user_param
