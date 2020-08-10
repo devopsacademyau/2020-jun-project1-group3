@@ -1,3 +1,19 @@
+data "aws_ssm_parameter" "db_host" {
+  name = "/wordpress/WORDPRESS_DB_HOST"
+}
+
+data "aws_ssm_parameter" "db_name" {
+  name = "/wordpress/WORDPRESS_DB_NAME"
+}
+
+data "aws_ssm_parameter" "db_user" {
+  name = "/wordpress/WORDPRESS_DB_USER"
+}
+
+data "aws_ssm_parameter" "db_password" {
+  name = "/wordpress/WORDPRESS_DB_PASSWORD"
+}
+
 resource "aws_ecs_cluster" "webapp_ecs" {
   name = "webapp-cluster"
 }
@@ -15,57 +31,71 @@ resource "aws_ecs_task_definition" "webapp_ecs_taskdef" {
     name = "webapp_efs"
     efs_volume_configuration {
       file_system_id = var.efs_id
-      root_directory = var.efs_access_point
     }
   }
 
-  container_definitions = <<DEFINITION
-[
-  {
-    "name": "webapp",
-    "image": "${var.app_image}",
-    "cpu": ${var.fargate_cpu},
-    "memory": ${var.fargate_memory},
-    "networkMode": "awsvpc",
-    "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "/ecs/webapp",
-          "awslogs-region": "${var.aws_region}",
-          "awslogs-stream-prefix": "ecs"
+  container_definitions = jsonencode([
+    {
+      name      = "webapp"
+      image     = var.app_image
+      essential = true
+      mountPoints = [
+        {
+          sourceVolume  = "webapp_efs"
+          containerPath = "/var/www/html"
         }
-    },
-    "essential": true,
-    "mountPoints": [
-      {
-        "containerPath": "/",
-        "sourceVolume": "webapp_efs"
+      ]
+      portMappings = [
+        {
+          containerPort = var.app_port
+          hostPort      = var.app_port
+        }
+      ]
+      "logConfiguration" : {
+        "logDriver" : "awslogs",
+        "options" : {
+          "awslogs-group" : "/ecs/webapp",
+          "awslogs-region" : var.aws_region,
+          "awslogs-stream-prefix" : "ecs"
+        }
       }
-    ],
-    "portMappings": [
-      {
-        "containerPort": ${var.app_port},
-        "hostPort": ${var.app_port}
-      }
-    ]
-  }
-]
-    DEFINITION
+      "environment" : [
+        {
+          "name" : "WORDPRESS_DB_HOST",
+          "value" : data.aws_ssm_parameter.db_host.value
+        },
+        {
+          "name" : "WORDPRESS_DB_USER",
+          "value" : data.aws_ssm_parameter.db_user.value
+        },
+        {
+          "name" : "WORDPRESS_DB_PASSWORD",
+          "value" : data.aws_ssm_parameter.db_password.value
+        },
+        {
+          "name" : "WORDPRESS_DB_NAME",
+          "value" : data.aws_ssm_parameter.db_name.value
+        }
+      ]
+    }
+  ])
+
 }
 
 resource "aws_ecs_service" "webapp_ecs_service" {
-  name             = "webapp-ecs-service"
-  cluster          = aws_ecs_cluster.webapp_ecs.id
-  task_definition  = aws_ecs_task_definition.webapp_ecs_taskdef.arn
-  desired_count    = var.app_count
-  launch_type      = "FARGATE"
-  platform_version = "1.4.0"
-  lifecycle {
-    ignore_changes = [desired_count]
-  }
+  name                 = "webapp-ecs-service"
+  cluster              = aws_ecs_cluster.webapp_ecs.id
+  task_definition      = aws_ecs_task_definition.webapp_ecs_taskdef.arn
+  desired_count        = var.app_count
+  launch_type          = "FARGATE"
+  platform_version     = "1.4.0"
+  force_new_deployment = true
+  scheduling_strategy  = "REPLICA"
+
   network_configuration {
-    security_groups = [aws_security_group.fargate_sg.id]
-    subnets         = [for id in var.private_subnets : id]
+    security_groups  = [aws_security_group.fargate_sg.id]
+    subnets          = [for id in var.private_subnets : id]
+    assign_public_ip = true
   }
 
   load_balancer {

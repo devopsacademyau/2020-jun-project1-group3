@@ -10,14 +10,19 @@ resource "aws_alb_target_group" "webapp_tg" {
   target_type = "ip"
 
   health_check {
-    healthy_threshold   = "3"
-    interval            = "30"
-    protocol            = "HTTP"
-    matcher             = "200"
-    timeout             = "3"
-    path                = var.health_check_path
-    unhealthy_threshold = "3"
+    interval = 60
+    path     = "/index.html"
+    port     = 80
+    protocol = "HTTP"
+    timeout  = 30
+    matcher  = "200-302,404"
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  depends_on = [aws_alb.webapp_alb]
 }
 
 # Redirect all traffic from ALB to Target Group
