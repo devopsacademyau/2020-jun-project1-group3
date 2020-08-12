@@ -4,9 +4,13 @@
 # .tfstate files
 *.tfstate
 *.tfstate.*
+*.plan
 
 # _backend files
 _backend.tf
+terraform/_provider.tf
+
 
 # MacOS files
 .DS_Store
+

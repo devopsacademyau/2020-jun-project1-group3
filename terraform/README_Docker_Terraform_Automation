@@ -22,6 +22,18 @@ make build
 3. Publish
 make publish
 
-4. deploy-wp
+4. deploy-wp - deploy upodated container image
 
 make deploy-wp
+
+5. plan terraform deploy with container tag
+
+make plan
+
+6. apply terraform
+
+make apply
+
+destroy terraform
+
+make destroy
