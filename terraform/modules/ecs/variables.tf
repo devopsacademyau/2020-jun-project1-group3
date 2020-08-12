@@ -85,3 +85,12 @@ variable "rds_database_username" {
 variable "rds_database_password" {
   type = string
 }
+
+variable "domain_name" {
+  type = string
+}
+
+variable "hosted_zone_id" {
+  type = string
+}
+

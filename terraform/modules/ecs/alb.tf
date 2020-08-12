@@ -36,3 +36,18 @@ resource "aws_alb_listener" "front_end" {
     type             = "forward"
   }
 }
+
+# We are creating route53 hosted zone on the console
+# as it is best to have a set of NS records to configure
+# our domain name in freenom
+resource "aws_route53_record" "wp_route53" {
+  zone_id = var.hosted_zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+    name                   = aws_alb.webapp_alb.dns_name
+    zone_id                = aws_alb.webapp_alb.zone_id
+    evaluate_target_health = true
+  }
+}

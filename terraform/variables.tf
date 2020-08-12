@@ -27,6 +27,16 @@ variable "app_image" {
 }
 
 variable "image_tag" {
-  type = string
+  type    = string
   default = "latest"
+}
+
+variable "domain_name" {
+  type    = string
+  default = "formterra.tk"
+}
+
+variable "hosted_zone_id" {
+  type    = string
+  default = "Z03893361UTFRYDKCLVMT"
 }
