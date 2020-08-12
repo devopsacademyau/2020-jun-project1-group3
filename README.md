@@ -3,7 +3,9 @@
 ## __MIGRATION OF ON-PREMISES WEB APP TO CLOUD__
 
 ### __TEAM MEMBERS:__
+
 Team "Devopsacademy Project Group3" has below tech nerds contribution.
+
 
           * DANIEL ANDRADE
           * FERNANDO ROLNIK
@@ -90,6 +92,21 @@ Below are the steps followed for the setup of Infrastructure and related network
 ##### __1.1 VPC CREATION__
 Virtual Private Cloud 
 
+
+=======
+|  8  |                                               |                 |
+|  9  |                                               |                 |
+| 10  |                                               |                 |
+
+
+### __INSTALLATION STEPS__
+
+Below are the Installation steps followed:
+
+#### __1. NETWORK CONFIGURATION__
+
+##### __1.1 VPC CREATION__
+In progress - to be updated
 
 ##### __1.2 SUBNET CREATION__
 In progress - to be updated
