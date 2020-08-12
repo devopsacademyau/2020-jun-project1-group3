@@ -37,3 +37,7 @@ make apply
 destroy terraform
 
 make destroy
+
+7. do everything in one go
+
+make all

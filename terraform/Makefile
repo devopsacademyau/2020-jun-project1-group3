@@ -41,3 +41,14 @@ apply:
 destroy:
 	@echo "💥💥💥💥🧨💣Destroying...."
 	terraform destroy
+
+	.PHONY: deploy
+deploy:
+	@echo "Deploying all in one...."
+	make plan
+	make apply
+	make login
+	make build
+	make publish
+	make deploy-wp
+	
