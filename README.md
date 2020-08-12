@@ -3,7 +3,7 @@
 ## __MIGRATION OF ON-PREMISES WEB APP TO CLOUD__
 
 ### __TEAM MEMBERS:__
-Team "Devopsacademy Project Group3" has below tech geeks.
+Team "Devopsacademy Project Group3" has below tech nerds contribution.
 
           * DANIEL ANDRADE
           * FERNANDO ROLNIK
@@ -74,19 +74,21 @@ Below are the pre-requisite that needs to be done before proceeing with the Clou
 |  5  | Docker Install - Team member's laptop         | Completed       |
 |  6  | Solution Diagram Review and Acceptance        | Completed       |
 |  7  | GitHub Repository Creation                    | Completed       |
-|  8  |                                               |                 |
-|  9  |                                               |                 |
+|  8  | JQ Installation -Team member's laptop         | Completed       |
+|  9  | Domain Name Registration                      | In Progress     |
 | 10  |                                               |                 |
-
+|     |                                               |                 |
 
 ### __INSTALLATION STEPS__
 
-Below are the Installation steps followed:
+Installation of Wordpress Application requires the Infrastructure to be available to deploy the application. Terraform is used for the creation of Infrastructure and related Networks.  
+
+Below are the steps followed for the setup of Infrastructure and related networks.
 
 #### __1. NETWORK CONFIGURATION__
 
 ##### __1.1 VPC CREATION__
-In progress - to be updated
+Virtual Private Cloud 
 
 
 ##### __1.2 SUBNET CREATION__
