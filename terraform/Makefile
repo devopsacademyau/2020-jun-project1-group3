@@ -42,7 +42,7 @@ destroy:
 	@echo "💥💥💥💥🧨💣Destroying...."
 	terraform destroy
 
-	.PHONY: deploy
+.PHONY: deploy
 deploy:
 	@echo "Deploying all in one...."
 	make plan
