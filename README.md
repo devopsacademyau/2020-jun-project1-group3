@@ -1,3 +1,4 @@
+
 # __PROJECT TITLE:__ 
 ###       __MIGRATION OF ON-PREMISES WEB APP TO CLOUD__
 
@@ -53,7 +54,8 @@ Table of Contents
       * [<em><strong>License</strong></em>](#license)
       * [<strong>Business Sign-OFF</strong>](#business-sign-off)
 
-# __Current Business Status__
+# __CURRENT BUSINESS STATUS__
+
 A company in Australia currently have a web application running on-premisis in a Linux virtual machine. The application is being used by hundreds of customers every day and it is based on Wordpress which uses LAMP stack (Linux, Apache, MySQL and PHP) to offer great products.
 
 Currently the solution is hosted in a single server (application and database) and deployments are made through FTP transfers to the server.
@@ -127,6 +129,18 @@ Below are the pre-requisite that needs to be setup for the team to go ahead with
 |  9  | Domain Name Registration                      | In Progress     |
 | 10  |                                               |                 |
 |     |                                               |                 |
+
+### __INSTALLATION STEPS__
+
+Installation of Wordpress Application requires the Infrastructure to be available to deploy the application. Terraform is used for the creation of Infrastructure and related Networks.  
+
+Below are the steps followed for the setup of Infrastructure and related networks.
+
+#### __1. NETWORK CONFIGURATION__
+
+##### __1.1 VPC CREATION__
+Virtual Private Cloud 
+
 
 ## __Installation Steps__
 
