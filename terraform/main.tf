@@ -47,4 +47,5 @@ module "ecs" {
   rds_database_password = module.ssm.rds_cluster_database_user_pw_param
   domain_name           = var.domain_name
   hosted_zone_id        = var.hosted_zone_id
+  acm_cert_arn          = var.acm_cert_arn
 }

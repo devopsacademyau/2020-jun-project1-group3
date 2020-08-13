@@ -43,6 +43,10 @@ variable "app_port" {
   default     = 80
 }
 
+variable "app_port_secure" {
+  default = 443
+}
+
 variable "app_count" {
   description = "Number of docker containers to run"
   default     = 2
@@ -94,3 +98,6 @@ variable "hosted_zone_id" {
   type = string
 }
 
+variable "acm_cert_arn" {
+  type = string
+}

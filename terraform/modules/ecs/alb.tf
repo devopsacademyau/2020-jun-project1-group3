@@ -28,9 +28,10 @@ resource "aws_alb_target_group" "webapp_tg" {
 # Redirect all traffic from ALB to Target Group
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.webapp_alb.id
-  port              = var.app_port
-  protocol          = "HTTP"
-
+  port              = var.app_port_secure
+  protocol          = "HTTPS"
+  depends_on        = [aws_alb_target_group.webapp_tg]
+  certificate_arn   = var.acm_cert_arn
   default_action {
     target_group_arn = aws_alb_target_group.webapp_tg.id
     type             = "forward"
