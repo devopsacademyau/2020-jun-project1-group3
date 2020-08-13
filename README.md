@@ -51,7 +51,6 @@ Table of Contents
          * [<strong>CONCLUSION</strong>](#conclusion)
          * [<strong>BUSINESS SIGN-OFF</strong>](#business-sign-off)
 
-
 # __CURRENT BUSINESS STATUS:__
 A company in Australia currently have a web application running on-premisis in a Linux virtual machine. The application is being used by hundreds of customers every day and it is based on Wordpress which uses LAMP stack (Linux, Apache, MySQL and PHP) to offer great products.
 
