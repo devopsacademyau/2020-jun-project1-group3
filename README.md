@@ -6,7 +6,6 @@
 
 Team "Devopsacademy Project Group3" has below tech nerds contribution.
 
-
           * DANIEL ANDRADE
           * FERNANDO ROLNIK
           * JAY AMARANAYAKE
