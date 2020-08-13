@@ -1,21 +1,21 @@
-output "rds_endpoint" {
-  description = "The cluster endpoint parameter value"
-  value       = aws_rds_cluster.aurora_mysql_serverless.endpoint
+output "rds_cluster_endpoint_param" {
+  description = "The cluster endpoint parameter name"
+  value       = aws_ssm_parameter.aurora_cluster_endpoint.arn
 }
 
-output "rds_database_name" {
-  description = "The DB name parameter value"
-  value       = aws_rds_cluster.aurora_mysql_serverless.database_name
+output "rds_cluster_database_name_param" {
+  description = "The DB name parameter name"
+  value       = aws_ssm_parameter.aurora_db_name.arn
 }
 
-output "rds_database_username" {
-  description = "The DB user parameter value"
-  value       = aws_rds_cluster.aurora_mysql_serverless.master_username
+output "rds_cluster_database_user_param" {
+  description = "The DB user parameter name"
+  value       = aws_ssm_parameter.aurora_username.arn
 }
 
-output "rds_database_password" {
+output "rds_cluster_database_user_pw_param" {
   description = "The DB user password parameter name"
-  value       = aws_rds_cluster.aurora_mysql_serverless.master_password
+  value       = aws_ssm_parameter.aurora_password.arn
 }
 
 output "rds_cluster_identifier" {

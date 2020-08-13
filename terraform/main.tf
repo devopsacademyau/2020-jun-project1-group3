@@ -20,14 +20,6 @@ module "rds_aurora" {
   rds_aurora_subnets = [for subnet in module.networking.private_subnets : subnet.id]
 }
 
-module "ssm" {
-  source                = "./modules/ssm"
-  rds_endpoint          = module.rds_aurora.rds_endpoint
-  rds_database_name     = module.rds_aurora.rds_database_name
-  rds_database_username = module.rds_aurora.rds_database_username
-  rds_database_password = module.rds_aurora.rds_database_password
-}
-
 module "ecr" {
   source          = "./modules/ecr"
   repository_name = var.repository_name
@@ -41,10 +33,10 @@ module "ecs" {
   public_subnets        = [for subnet in module.networking.public_subnets : subnet.id]
   private_subnets       = [for subnet in module.networking.private_subnets : subnet.id]
   app_image             = "${module.ecr.ecr.repository_url}:${var.image_tag}"
-  rds_endpoint          = module.ssm.rds_cluster_endpoint_param
-  rds_database_name     = module.ssm.rds_cluster_database_name_param
-  rds_database_username = module.ssm.rds_cluster_database_user_param
-  rds_database_password = module.ssm.rds_cluster_database_user_pw_param
+  rds_endpoint          = module.rds_aurora.rds_cluster_endpoint_param
+  rds_database_name     = module.rds_aurora.rds_cluster_database_name_param
+  rds_database_username = module.rds_aurora.rds_cluster_database_user_param
+  rds_database_password = module.rds_aurora.rds_cluster_database_user_pw_param
   domain_name           = var.domain_name
   hosted_zone_id        = var.hosted_zone_id
   acm_cert_arn          = var.acm_cert_arn
