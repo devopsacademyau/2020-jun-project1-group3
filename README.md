@@ -3,7 +3,9 @@
 ## __MIGRATION OF ON-PREMISES WEB APP TO CLOUD__
 
 ### __TEAM MEMBERS:__
+
 Team "Devopsacademy Project Group3" has below tech nerds contribution.
+
 
           * DANIEL ANDRADE
           * FERNANDO ROLNIK
@@ -145,6 +147,21 @@ Also, the infrastructure is built across 3 availability zones (ap-southeast-2) t
 ##### __1.1 VPC CREATION__
 Virtual Private Cloud
 
+
+=======
+|  8  |                                               |                 |
+|  9  |                                               |                 |
+| 10  |                                               |                 |
+
+
+### __INSTALLATION STEPS__
+
+Below are the Installation steps followed:
+
+#### __1. NETWORK CONFIGURATION__
+
+##### __1.1 VPC CREATION__
+In progress - to be updated
 
 ##### __1.2 SUBNET CREATION__
 In progress - to be updated
