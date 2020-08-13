@@ -1,10 +1,10 @@
 # __PROJECT - DEVOPSACADEMY - PROJECT - GROUP3__
 
-## __MIGRATION OF ON-PREMISES WEB APP TO CLOUD__
+## __PROJECT TITLE:  MIGRATION OF ON-PREMISES WEB APP TO CLOUD__
 
 ### __TEAM MEMBERS:__
 
-Team "Devopsacademy Project Group3" has below tech nerds contribution.
+Team "Devopsacademy Project Group3" consists of 4 tech nerds for the delivery of the Pilot project.
 
           * DANIEL ANDRADE
           * FERNANDO ROLNIK
@@ -24,9 +24,12 @@ Table of Contents
       * [<strong>TECHNOLOGY PRODUCTS &amp; SERVICES</strong>](#technology-products--services)
       * [<strong>PRE-REQUISITES</strong>](#pre-requisites)
       * [<strong>INSTALLATION STEPS</strong>](#installation-steps)
-         * [<strong>INFRASTRUCTURE INSTALLATION</strong>](#infrastructure-installation)
+         * [<strong>I. INFRASTRUCTURE INSTALLATION</strong>](#i-infrastructure-installation)
             * [<strong>1. NETWORK CONFIGURATION</strong>](#1-network-configuration)
                * [<strong>1.1 VPC CREATION</strong>](#11-vpc-creation)
+         * [<strong>INSTALLATION STEPS</strong>](#installation-steps-1)
+            * [<strong>1. NETWORK CONFIGURATION</strong>](#1-network-configuration-1)
+               * [<strong>1.1 VPC CREATION</strong>](#11-vpc-creation-1)
                * [<strong>1.2 SUBNET CREATION</strong>](#12-subnet-creation)
                * [<strong>1.3 SECURITY GROUP CREATION</strong>](#13-security-group-creation)
                * [<strong>1.4 INTERNET GATEWAY CREATION</strong>](#14-internet-gateway-creation)
@@ -36,14 +39,16 @@ Table of Contents
             * [<strong>2. APPLICATION LOAD BALANCER CREATION</strong>](#2-application-load-balancer-creation)
             * [<strong>3. EFS CREATION</strong>](#3-efs-creation)
             * [<strong>4. RDS CLUSTER CREATION</strong>](#4-rds-cluster-creation)
-         * [<strong>APPLICATION INSTALLATION</strong>](#application-installation)
+         * [<strong>II. APPLICATION INSTALLATION</strong>](#ii-application-installation)
             * [<strong>1. WORDPRESS IMAGE CREATION AND UPLOAD TO REGISTRY</strong>](#1-wordpress-image-creation-and-upload-to-registry)
             * [<strong>2. ECS CLUSTER CREATION</strong>](#2-ecs-cluster-creation)
-         * [<strong>LOGGING &amp; ALARMING</strong>](#logging--alarming)
-      * [<strong>TERRAFORM AUTOMATIC DEPLOYMENT</strong>](#terraform-automatic-deployment)
+         * [<strong>III. SECURING APPLICATION</strong>](#iii-securing-application)
+         * [<strong>IV. LOGGING &amp; ALARMING</strong>](#iv-logging--alarming)
+      * [<strong>DEPLOYMENT AUTOMATION</strong>](#deployment-automation)
                * [DockerFile](#dockerfile)
                * [MakeFile](#makefile)
                * [Automatic Deployment Steps](#automatic-deployment-steps)
+      * [<strong>APPLICATION AUTOMATION</strong>](#application-automation)
       * [<strong>RECOMMENDATIONS</strong>](#recommendations)
          * [<strong>IMPROVEMENTS:</strong>](#improvements)
          * [<strong>FEATURES NOT DELIVERED IN THIS PHASE</strong>](#features-not-delivered-in-this-phase)
@@ -135,8 +140,9 @@ Below are the different stages of Application Installation and readiness.
    1. Infrasture Readiness
    2. Application Installation
    3. Securing Application
+   4. Logging and Alarming
 
-### __INFRASTRUCTURE INSTALLATION__
+### __I. INFRASTRUCTURE INSTALLATION__
 
 A Well architected Infrastructure needs to have High Availability, Reliability. The AWS cloud is built in Sydney region, considering the users are specific to Australia. 
 Also, the infrastructure is built across 3 availability zones (ap-southeast-2) to achieve High Availabiity in case of diaster.
@@ -190,7 +196,7 @@ In progress - to be updated
 In progress - to be updated
 
 
-### __APPLICATION INSTALLATION__
+### __II. APPLICATION INSTALLATION__
 
 #### __1. WORDPRESS IMAGE CREATION AND UPLOAD TO REGISTRY__
 In progress - to be updated
@@ -198,18 +204,23 @@ In progress - to be updated
 #### __2. ECS CLUSTER CREATION__
 In progress - to be updated
 
+### __III. SECURING APPLICATION__
+In progress - to be updated
 
-### __LOGGING & ALARMING__
+### __IV. LOGGING & ALARMING__
 In progress - to be updated
 
 
-## __TERRAFORM AUTOMATIC DEPLOYMENT__
+##  __DEPLOYMENT AUTOMATION__
 
 ##### DockerFile
 
 ##### MakeFile
 
 ##### Automatic Deployment Steps
+
+## __APPLICATION AUTOMATION__
+
 Below are the steps to be followed to run automatic deployment of application cluster.
 
 ## __RECOMMENDATIONS__
