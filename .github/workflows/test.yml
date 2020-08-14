@@ -45,7 +45,6 @@ jobs:
         acm_cert_arn: ${{ secrets.ACM_CERT_ARN }}
       run: |
         cd terraform/&&make init
-        cd terraform/&&make init
         cd terraform/&&make plan
         cd terraform/&&make apply
         cd docker/&&make login
