@@ -43,6 +43,6 @@ jobs:
         hosted_zone_id: ${{ secrets.HOSTED_ZONE_ID }}
         domain_name: ${{ secrets.DOMAIN_NAME }}
         acm_cert_arn: ${{ secrets.ACM_CERT_ARN }}
-      run:
+      run: |
         make init
         make plan
