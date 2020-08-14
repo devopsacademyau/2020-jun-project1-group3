@@ -44,10 +44,14 @@ jobs:
         domain_name: ${{ secrets.DOMAIN_NAME }}
         acm_cert_arn: ${{ secrets.ACM_CERT_ARN }}
       run: |
-        cd terraform/&&make init
-        cd terraform/&&make plan
-        cd terraform/&&make apply
-        cd docker/&&make login
-        cd docker/&&make build
-        cd docker/&&make publish
-        cd terraform/&&make deploy-wp
+        cd terraform
+        make init
+        make plan
+        make apply
+        cd ..
+        cd docker
+        make login
+        make build
+        make publish
+        cd terraform
+        make deploy-wp
