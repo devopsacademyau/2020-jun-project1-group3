@@ -106,28 +106,67 @@ resource "aws_route_table_association" "private" {
 resource "aws_network_acl" "private_nacl" {
   vpc_id     = aws_vpc.vpc.id
   subnet_ids = [for subnet in aws_subnet.private_subnet : subnet.id]
-
-  # TODO: need to lock down this
-  ingress {
-    protocol   = -1
-    rule_no    = 100
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 0
-    to_port    = 0
-  }
-
-  egress {
-    protocol   = -1
-    rule_no    = 100
-    action     = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port  = 0
-    to_port    = 0
-  }
   tags = {
     "Name" = "${var.project}-private-nacl"
   }
+}
+
+resource "aws_network_acl_rule" "private_inbound_ssh_rule" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  for_each       = toset(aws_subnet.public_subnet[*].cidr_block)
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "allow"
+  rule_number    = 100 + tonumber(substr(each.value, 5, 1))
+  from_port      = 22
+  to_port        = 22
+  cidr_block     = each.value
+}
+
+resource "aws_network_acl_rule" "private_inbound_80_rule" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  for_each       = toset(aws_subnet.public_subnet[*].cidr_block)
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "allow"
+  rule_number    = 200 + tonumber(substr(each.value, 5, 1))
+  from_port      = 80
+  to_port        = 80
+  cidr_block     = each.value
+}
+
+resource "aws_network_acl_rule" "private_inbound_443_rule" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  for_each       = toset(aws_subnet.public_subnet[*].cidr_block)
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "allow"
+  rule_number    = 300 + tonumber(substr(each.value, 5, 1))
+  from_port      = 80
+  to_port        = 80
+  cidr_block     = each.value
+}
+
+resource "aws_network_acl_rule" "private_inbound_ephemeral_rule" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "allow"
+  rule_number    = 400
+  from_port      = 1024
+  to_port        = 65535
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "private_outbound_rule" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  egress         = true
+  protocol       = -1
+  rule_action    = "allow"
+  rule_number    = 100
+  from_port      = 0
+  to_port        = 0
+  cidr_block     = "0.0.0.0/0"
 }
 
 resource "aws_network_acl" "public_nacl" {
