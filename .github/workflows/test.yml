@@ -9,7 +9,7 @@ on:
     paths:
     - "terraform/**"
 # Change to master when it is done
-    branches: [ feature/terraform_cicd ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -22,7 +22,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform
+#        working-directory: terraform
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -45,9 +45,10 @@ jobs:
         acm_cert_arn: ${{ secrets.ACM_CERT_ARN }}
       run: |
         make init
-        # make apply
-        # make login
-        # make build
-        # make publish
-        # make deploy-wp
-        # :)
+        cd terraform/&&make init
+        cd terraform/&&make plan
+        cd terraform/&&make apply
+        cd docker/&&make login
+        cd docker/&&make build
+        cd docker/&&make publish
+        cd terraform/&&make deploy-wp

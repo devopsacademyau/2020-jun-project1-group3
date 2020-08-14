@@ -14,8 +14,8 @@ deploy:
 	cd terraform/&&make deploy-wp
 	@echo 🙌🙃Deployment finished!
 
-
 .PHONY: destroy
 destroy:
 	@echo 💥💥💥💥🧨💣Destroying...
+	cd terraform/&&make init
 	cd terraform/&&make destroy

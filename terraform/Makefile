@@ -2,11 +2,6 @@ TAG ?= $(shell git rev-parse --short HEAD)
 REPO_URL ?= $(shell terraform output -json ecr_module | jq .ecr | jq -r .repository_url)
 CONTAINER_NAME ?= webapp
 
-.PHONY: deploy-wp
-deploy-wp:
-	@echo "📦🏗️⛅Deploying Wordpress customized image..."
-	terraform apply -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'ssh_allowed_cidr=${ssh_allowed_cidr}'
-
 .PHONY: init
 init:
 	@echo "🏁🚥 Initializing...."
@@ -24,8 +19,12 @@ apply:
 	aws s3 cp s3://${tf_backend_bucket}/tf.plan .
 	terraform apply -auto-approve "tf.plan"
 
+.PHONY: deploy-wp
+deploy-wp:
+	@echo "📦🏗️⛅Deploying Wordpress customized image..."
+	terraform apply -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'ssh_allowed_cidr=${ssh_allowed_cidr}'
+
 .PHONY: destroy
 destroy:
 	@echo "💥💥💥💥🧨💣Destroying...."
-	make init
 	terraform destroy -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'ssh_allowed_cidr=${ssh_allowed_cidr}'
