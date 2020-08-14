@@ -25,26 +25,32 @@ publish:
 .PHONY: deploy-wp
 deploy-wp:
 	@echo "📦🏗️⛅Deploying Wordpress customized image..."
-	terraform apply -var 'app_image=${REPO_URL}' -var='image_tag=${TAG}' 
+	terraform apply -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'tf_backend_bucket=${tf_backend_bucket}'
+
+.PHONY: init
+init:
+	@echo "🏁🚥 Initializing...."
+	terraform init -backend-config="bucket=${tf_backend_bucket}"
 
 .PHONY: plan
 plan:
 	@echo "🌏🚜Planning...."
-	terraform plan -out tf.plan -var='image_tag=${TAG}'
+	terraform plan -out tf.plan -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}'-var 'tf_backend_bucket=${tf_backend_bucket}'
 
 .PHONY: apply
 apply:
 	@echo "⛅🌏🏗️Applying...."
-	terraform apply "tf.plan"
+	terraform apply -auto-approve "tf.plan"
 
 .PHONY: destroy
 destroy:
 	@echo "💥💥💥💥🧨💣Destroying...."
-	terraform destroy
+	terraform destroy -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'tf_backend_bucket=${tf_backend_bucket}'
 
 .PHONY: deploy
 deploy:
 	@echo "Deploying all in one...."
+	make init
 	make plan
 	make apply
 	make login

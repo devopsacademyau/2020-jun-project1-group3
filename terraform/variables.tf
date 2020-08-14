@@ -33,15 +33,15 @@ variable "image_tag" {
 
 variable "domain_name" {
   type    = string
-  default = "formterra.tk"
+#  default = "formterra.tk"
 }
 
 variable "hosted_zone_id" {
   type    = string
-  default = "Z03893361UTFRYDKCLVMT"
+#  default = "Z03893361UTFRYDKCLVMT"
 }
 
 variable "acm_cert_arn" {
   type    = string
-  default = "arn:aws:acm:ap-southeast-2:907095435092:certificate/82cabd8b-119d-4776-b8d1-a1d163814e99"
+#  default = "arn:aws:acm:ap-southeast-2:907095435092:certificate/82cabd8b-119d-4776-b8d1-a1d163814e99"
 }

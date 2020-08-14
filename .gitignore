@@ -7,8 +7,6 @@
 *.plan
 
 # _backend files
-_backend.tf
-terraform/_provider.tf
 
 
 # MacOS files
