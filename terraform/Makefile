@@ -27,4 +27,17 @@ deploy-wp:
 .PHONY: destroy
 destroy:
 	@echo "💥💥💥💥🧨💣Destroying...."
+	make init
 	terraform destroy -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'ssh_allowed_cidr=${ssh_allowed_cidr}'
+
+.PHONY: deploy
+deploy:
+	@echo 🔨🧟🛠️Deploying all in one...
+	make init
+	make plan
+	make apply
+	cd ../docker/&&make login
+	cd ../docker/&&make build
+	cd ../docker/&&make publish
+	make deploy-wp
+	@echo 🙌🙃Deployment finished!

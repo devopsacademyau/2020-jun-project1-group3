@@ -1,17 +1,18 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Test Full Deployment
+name: make plan on every update in the terraform folder(PRs)
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push:
     paths:
-    - "terraform/**"
-# Change to master when it is done
-    branches: [ master ]
+     - "terraform/**"
+  #   branches: [ master ]
   pull_request:
-    branches: [ master ]
+    paths:
+     - "terraform/**"
+  #   branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -22,7 +23,7 @@ jobs:
     defaults:
       run:
         shell: bash
-#        working-directory: terraform
+        working-directory: terraform
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -44,15 +45,5 @@ jobs:
         domain_name: ${{ secrets.DOMAIN_NAME }}
         acm_cert_arn: ${{ secrets.ACM_CERT_ARN }}
       run: |
-        cd terraform
         make init
         make plan
-        make apply
-        cd ..
-        cd docker
-        make login
-        make build
-        make publish
-        cd ..
-        cd terraform
-        make deploy-wp

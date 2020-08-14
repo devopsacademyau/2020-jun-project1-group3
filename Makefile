@@ -5,17 +5,9 @@ CONTAINER_NAME ?= webapp
 .PHONY: deploy
 deploy:
 	@echo 🔨🧟🛠️Deploying all in one...
-	cd terraform/&&make init
-	cd terraform/&&make plan
-	cd terraform/&&make apply
-	cd docker/&&make login
-	cd docker/&&make build
-	cd docker/&&make publish
-	cd terraform/&&make deploy-wp
-	@echo 🙌🙃Deployment finished!
+	cd terraform/&&make deploy
 
 .PHONY: destroy
 destroy:
 	@echo 💥💥💥💥🧨💣Destroying...
-	cd terraform/&&make init
 	cd terraform/&&make destroy
