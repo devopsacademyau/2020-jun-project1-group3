@@ -53,5 +53,6 @@ jobs:
         make login
         make build
         make publish
+        cd ..
         cd terraform
         make deploy-wp
