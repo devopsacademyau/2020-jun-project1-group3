@@ -25,7 +25,7 @@ publish:
 .PHONY: deploy-wp
 deploy-wp:
 	@echo "📦🏗️⛅Deploying Wordpress customized image..."
-	terraform apply -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'tf_backend_bucket=${tf_backend_bucket}'
+	terraform apply -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'ssh_allowed_cidr=${ssh_allowed_cidr}'
 
 .PHONY: init
 init:
@@ -35,7 +35,7 @@ init:
 .PHONY: plan
 plan:
 	@echo "🌏🚜Planning...."
-	terraform plan -out tf.plan -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}'-var 'tf_backend_bucket=${tf_backend_bucket}'
+	terraform plan -out tf.plan -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'ssh_allowed_cidr=${ssh_allowed_cidr}'
 
 .PHONY: apply
 apply:
@@ -45,7 +45,7 @@ apply:
 .PHONY: destroy
 destroy:
 	@echo "💥💥💥💥🧨💣Destroying...."
-	terraform destroy -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'tf_backend_bucket=${tf_backend_bucket}'
+	terraform destroy -auto-approve -var 'app_image=${REPO_URL}' -var 'image_tag=${TAG}' -var 'hosted_zone_id=${hosted_zone_id}' -var 'domain_name=${domain_name}' -var 'acm_cert_arn=${acm_cert_arn}' -var 'ssh_allowed_cidr=${ssh_allowed_cidr}'
 
 .PHONY: deploy
 deploy:

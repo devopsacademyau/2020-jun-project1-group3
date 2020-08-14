@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    paths:
+    - "terraform/**"
+# Change to master when it is done
+    branches: [ feature/terraform_cicd ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: terraform
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a single command using the runners shell
+    #- name: Run a one-line script
+    #  run: echo Hello, world!
+
+    # Runs a set of commands using the runners shell
+    - name: terraform plan
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        tf_backend_bucket: terraform-fr
+        ssh_allowed_cidr: 122.199.23.68/32
+        hosted_zone_id: Z0521665QLDWBMGJ9OXW
+        domain_name: itworks.gq
+        acm_cert_arn: arn:aws:acm:ap-southeast-2:165765640813:certificate/b16dfc6d-188d-45b5-bb9f-7deeca8ec50d
+      run:
+        make all
