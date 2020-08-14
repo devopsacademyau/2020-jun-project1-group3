@@ -45,9 +45,8 @@ jobs:
         acm_cert_arn: ${{ secrets.ACM_CERT_ARN }}
       run: |
         make init
-        make deploy
-        make apply
-        make login
-        make build
-        make publish
-        make deploy-wp
+        # make apply
+        # make login
+        # make build
+        # make publish
+        # make deploy-wp
