@@ -39,11 +39,11 @@
 
 Below are the terraform files for creating ECS FARGATE Cluster
 - Application Load Balancer - [alb.tf](./alb.tf)
-- ECS FARGATE Cluster - [FARGATE](./main.tf)
-- IAM Roles for FARGATE - [IAM Role](./roles.tf)
-- ALB and FARGATE Security Group - [Security Group](./security.tf)
-- Enable Cloudwatch Logs - [Logging](./logs.tf)
-- ECS Autoscaling - [ECS AutoScaling](./auto_scaling.tf)
+- ECS FARGATE Cluster - [main.tf](./main.tf)
+- IAM Roles for FARGATE - [roles.tf](./roles.tf)
+- ALB and FARGATE Security Group - [security.tf](./security.tf)
+- Enable Cloudwatch Logs - [logs.tf](./logs.tf)
+- ECS Autoscaling - [auto_scaling.tf](./auto_scaling.tf)
 
 
 Logging and Alarming are enabled for ECS for monitoring and Notifying health of FARGATE containers. Refer [Logging & Alarming](../../../docs/LoggingandAlarming.md)
