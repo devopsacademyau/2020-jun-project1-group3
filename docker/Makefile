@@ -4,7 +4,7 @@ CONTAINER_NAME ?= webapp
 
 .PHONY: login
 login:
-	@echo "Retrieving an authentication token and authenticate your Docker client to your registry"
+	@echo "🏗️Retrieving an authentication token and authenticate your Docker client to your registry"
 	aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin ${REPO_URL}
 
 .PHONY: build
