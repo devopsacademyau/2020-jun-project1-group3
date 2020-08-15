@@ -1,21 +1,31 @@
-## Objectives:
+# Networking Module
 
-- New VPC with a /16 CIDR
-- 2 /24 public subnets(different AZs)
-- 2 /24 private subnets(different AZs)
-- 2 NACLs public/private (ALLOW ALL is not permitted)
-- Internet Gateway in place
+## Parameters
+### Inputs
+- vpc_cidr
+- ssh_allowed_cidr
+- project
 
-## Acceptance Criteria:
+### Outputs
+- vpc_id
+- private_subnets
+- public_subnets
 
-- Code is in Terraform and merged into master
-- I can run instances in public and private Subnet
-- I can't directly access the private instance from internet
-- I can ssh the private instance from the public one
-- No security groups or nacls have ALLOW ALL
-- I can access the public one using ssh from my local machine through internet
-- A README file is created documenting the VPC, the subnets and how to deploy the code
+## VPC
+| Region         |  CIDR         |
+|----------------|:--------------|
+| ap-southeast-2 |  10.0.0.0/16  |
 
+## Private Subnets
+| AZ              |  CIDR         | NAME
+|-----------------|:--------------|-------------------------------------|
+| ap-southeast-2a |  10.0.6.0/24  | pj-01-gp-03-private-ap-southeast-2a |
+| ap-southeast-2b |  10.0.7.0/24  | pj-01-gp-03-private-ap-southeast-2b |
+| ap-southeast-2c |  10.0.8.0/24  | pj-01-gp-03-private-ap-southeast-2c |
 
-## TODO
-- Still the instances in private subnet can't go out to internet through NGW.
+## Public Subnets
+| AZ              |  CIDR         | NAME
+|-----------------|:--------------|-------------------------------------|
+| ap-southeast-2a |  10.0.0.0/24  | pj-01-gp-03-public-ap-southeast-2a  |
+| ap-southeast-2b |  10.0.1.0/24  | pj-01-gp-03-public-ap-southeast-2b  |
+| ap-southeast-2c |  10.0.2.0/24  | pj-01-gp-03-public-ap-southeast-2c  |
