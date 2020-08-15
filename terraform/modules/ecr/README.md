@@ -1,10 +1,10 @@
 #ECR Module
 
 ## Parameters
-###Inputs
+### Inputs
 - repository_name
 
-###Outputs
+### Outputs
 - ECR URL
   
 
