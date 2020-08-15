@@ -14,5 +14,5 @@ build:
 
 .PHONY: publish
 publish:
-	@echo "🚀📦⛅⛅Pushing container..."
+	@echo "🚀📦⛅Pushing container..."
 	docker push ${REPO_URL}:${TAG}
