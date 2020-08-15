@@ -2,41 +2,41 @@
 
 ## Parameters
 ### Inputs
-```
--vpc_id
--rds_aurora_subnets
--engine
--engine_mode
--engine_version
--db_name
--db_user
--backup_retention_period
--skip_final_snapshot
--aurora_port
--auto_pause
--max_capacity
--min_capacity
--seconds_until_auto_pause
--timeout_action
--db_parameter_name
--db_host_parameter_name
--db_user_parameter_name
--db_pw_parameter_name
-```
+
+- vpc_id
+- rds_aurora_subnets
+- engine
+- engine_mode
+- engine_version
+- db_name
+- db_user
+- backup_retention_period
+- skip_final_snapshot
+- aurora_port
+- auto_pause
+- max_capacity
+- min_capacity
+- seconds_until_auto_pause
+- timeout_action
+- db_parameter_name
+- db_host_parameter_name
+- db_user_parameter_name
+- db_pw_parameter_name
+
 
 ### Outputs
-```
--rds_cluster_endpoint_param
--rds_cluster_database_name_param
--rds_cluster_database_user_param
--rds_cluster_database_user_pw_param
--rds_cluster_identifier
--rds_database_port
--rds_database_engine
--rds_database_engine_mode
--rds_database_engine_version
--rds_security_group
-```
+
+- rds_cluster_endpoint_param
+- rds_cluster_database_name_param
+- rds_cluster_database_user_param
+- rds_cluster_database_user_pw_param
+- rds_cluster_identifier
+- rds_database_port
+- rds_database_engine
+- rds_database_engine_mode
+- rds_database_engine_version
+- rds_security_group
+
 
 ## Objectives:
 
