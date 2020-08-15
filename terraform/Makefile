@@ -40,4 +40,4 @@ deploy:
 	cd ../docker/&&make build
 	cd ../docker/&&make publish
 	make deploy-wp
-	@echo 🙌🙃🙌🔥Deployment finished!
+	@echo 🙌🙃🙌Deployment finished!
