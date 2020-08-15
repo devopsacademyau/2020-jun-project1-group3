@@ -68,7 +68,7 @@ The CEO wanted to migarte the On-premesis Web Application to AWS cloud and below
 
 # Technology Solution - Getting Started
 
-__Technology Products / Services_
+__Technology Products / Services__
 
 Below are the Technology Products chosen to deliver this pilot Migration solution.
 
@@ -84,7 +84,9 @@ Below are the Technology Products chosen to deliver this pilot Migration solutio
 |  Container Registry          |  ECR                         |
 
 
+
 Solution diagram showing Technology Products/Services and the traffic flow is shown below. 
+
 
  ![Solution Diagram](./images/da-project-group3.png)
 
@@ -140,20 +142,20 @@ Execute the below steps to deploy the Application using Terraform Automation.
 3. Login to the Elastic Container Registry.
 >       make login
 
-1. Build Wordpress Container Image 
+4. Build Wordpress Container Image 
 >       make build
 
-1. Publish the docker image to ECS Registry - ECR
+5. Publish the docker image to ECS Registry - ECR
 >       make publish
 
-4. Redeploy with Updated Image.
+6. Redeploy with Updated Image.
 >       make deploy-wp
 
 
-To do the deployment in one go, just execute the below command and the above 4 steps will be automatically run to deploy the application.
+To do the deployment in one go, just execute the below command and the above 6 steps will be automatically run to deploy the application.
 >      make all
 
-TO destroy all the AWS resources deployed as part of Terraform, execute below command.
+To destroy all the AWS resources deployed as part of Terraform, execute below command.
 >       make destroy
 
 # Application CICD / Automation
