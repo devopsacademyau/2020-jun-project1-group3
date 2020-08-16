@@ -22,7 +22,6 @@
       - Kiko Collet
 
 
-
 Table of Contents
 =================
 
@@ -41,8 +40,10 @@ Table of Contents
          * [The Real CI/CD automation](#the-real-cicd-automation)
       * [Tech Debt/ Things to improve](#tech-debt-things-to-improve)
       * [More info](#more-info)
-      * [Deployment Steps in detail](#deployment-steps-in-detail)
+         * [Deployment Steps in detail](#deployment-steps-in-detail)
    * [References](#references)
+   * [License](#license)
+
 
 
 # Current Business Status
@@ -193,7 +194,7 @@ Below are the Technology Products chosen to deliver this pilot Migration solutio
 
 <details>
 
-## Deployment Steps in detail
+### Deployment Steps in detail
 - Plan terraform from **terraform** folder
 
    ```make plan```
@@ -242,7 +243,7 @@ Below are the different stages of Application Installation and readiness.
 
 [AUTOMATING WORDPRESS](https://medium.com/@beBrllnt/from-30-minutes-to-10-seconds-automating-wordpress-setup-5ff7526942c0)
 
-<details>
+
 # License
 
 [LICENSE](./LICENSE)
