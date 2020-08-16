@@ -21,7 +21,6 @@
       - Denis Silva
       - Kiko Collet
 
-
 Table of Contents
 =================
 
@@ -40,11 +39,6 @@ Table of Contents
          * [The Real CI/CD automation](#the-real-cicd-automation)
       * [Tech Debt/ Things to improve](#tech-debt-things-to-improve)
       * [More info](#more-info)
-         * [Deployment Steps in detail](#deployment-steps-in-detail)
-   * [References](#references)
-   * [License](#license)
-
-
 
 # Current Business Status
 A company in Australia currently have a web application running on-premisis in a Linux virtual machine. The application is being used by hundreds of customers every day and it is based on Wordpress which uses LAMP stack (Linux, Apache, MySQL and PHP) to offer great products.
@@ -194,7 +188,7 @@ Below are the Technology Products chosen to deliver this pilot Migration solutio
 
 <details>
 
-### Deployment Steps in detail
+***Deployment Steps in detail***
 - Plan terraform from **terraform** folder
 
    ```make plan```
@@ -237,14 +231,14 @@ Below are the different stages of Application Installation and readiness.
 - [Logging and Alarming](./docs/LoggingandAlarming.md)
 
 
-# References
+***References***
 
 [WORDPRESS BEST PRACTISE](https://aws.amazon.com/blogs/architecture/wordpress-best-practices-on-aws/)
 
 [AUTOMATING WORDPRESS](https://medium.com/@beBrllnt/from-30-minutes-to-10-seconds-automating-wordpress-setup-5ff7526942c0)
 
 
-# License
+***License***
 
 [LICENSE](./LICENSE)
 
