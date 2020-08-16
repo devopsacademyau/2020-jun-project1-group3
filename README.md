@@ -22,6 +22,7 @@
       - Kiko Collet
 
 
+
 Table of Contents
 =================
 
@@ -31,17 +32,18 @@ Table of Contents
    * [Proposed Solution](#proposed-solution)
       * [High level design](#high-level-design)
       * [Pre-Requisites](#pre-requisites)
-      * [Deploy from your computer](#deploy-from-your-computer)
+      * [Quick Deployment from your computer](#quick-deployment-from-your-computer)
          * [Deployment steps](#deployment-steps)
          * [Destroy your deployment](#destroy-your-deployment)
       * [Test the CI/CD setup](#test-the-cicd-setup)
+         * [How to trigger CI/CD Deploy action](#how-to-trigger-cicd-deploy-action)
+         * [How to trigger CI/CD Destroy action](#how-to-trigger-cicd-destroy-action)
+         * [The Real CI/CD automation](#the-real-cicd-automation)
       * [Tech Debt/ Things to improve](#tech-debt-things-to-improve)
       * [More info](#more-info)
-      * [Installation Steps](#installation-steps)
-   * [Deployment / Usage](#deployment--usage)
-   * [Application CICD / Automation](#application-cicd--automation)
-   * [Recommendations](#recommendations)
-   * [Resources](#resources)
+      * [Deployment Steps in detail](#deployment-steps-in-detail)
+   * [References](#references)
+
 
 # Current Business Status
 A company in Australia currently have a web application running on-premisis in a Linux virtual machine. The application is being used by hundreds of customers every day and it is based on Wordpress which uses LAMP stack (Linux, Apache, MySQL and PHP) to offer great products.
