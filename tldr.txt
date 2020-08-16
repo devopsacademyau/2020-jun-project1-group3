@@ -12,15 +12,17 @@ We will deploy triggering GH Actions. At the end we will destroy from a local co
 
 Grab the variables below (TIP fill it, you will need to paste it on your terminal to destroy)
 
-acm_cert_arn=
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-domain_name=
-hosted_zone_id=
-ssh_allowed_cidr=
-tf_backend_bucket=
+export acm_cert_arn=
+export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export domain_name=
+export hosted_zone_id=
+export ssh_allowed_cidr=
+export tf_backend_bucket=
 
 Go to GH Settings > Secrets and fill up these variables.
+
+(Keep this export to copy and paste on you terminal later to destroy)
 
 Trigger the Actions
 
