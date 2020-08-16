@@ -39,6 +39,8 @@ git clone git@github.com:devopsacademyau/2020-jun-project1-group3.git
 paste the variables block
 make destroy
 
+REMEMBER TO OVERWRITE YOUR AWS_SECRET_ACCESS_KEY ON GIT HUB ACTIONS AFTER THE END AND DELETE THIS ACCESS KEYS ON AWS
+
 As an alternative you can deploy from your local computer
 git clone git@github.com:devopsacademyau/2020-jun-project1-group3.git
 paste the variables block
