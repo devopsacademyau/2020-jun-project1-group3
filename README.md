@@ -21,23 +21,29 @@
       - Denis Silva
       - Kiko Collet
 
+
 Table of Contents
 =================
 
    * [Current Business Status](#current-business-status)
       * [Business Requirement](#business-requirement)
       * [Assumptions](#assumptions)
-   * [Technology Solution - Getting Started](#technology-solution---getting-started)
+   * [Proposed Solution](#proposed-solution)
+      * [High level design](#high-level-design)
       * [Pre-Requisites](#pre-requisites)
+      * [Deploy from your computer](#deploy-from-your-computer)
+         * [Deployment steps](#deployment-steps)
+         * [Destroy your deployment](#destroy-your-deployment)
+      * [Test the CI/CD setup](#test-the-cicd-setup)
+      * [Tech Debt/ Things to improve](#tech-debt-things-to-improve)
+      * [More info](#more-info)
       * [Installation Steps](#installation-steps)
    * [Deployment / Usage](#deployment--usage)
    * [Application CICD / Automation](#application-cicd--automation)
    * [Recommendations](#recommendations)
    * [Resources](#resources)
-   * [License](#license)
 
-
-## Current Business Status
+# Current Business Status
 A company in Australia currently have a web application running on-premisis in a Linux virtual machine. The application is being used by hundreds of customers every day and it is based on Wordpress which uses LAMP stack (Linux, Apache, MySQL and PHP) to offer great products.
 
 Currently the solution is hosted in a single server (application and database) and deployments are made through FTP transfers to the server.
@@ -134,8 +140,6 @@ Below are the Technology Products chosen to deliver this pilot Migration solutio
 ### Destroy your deployment
 - From the root of the repository: ```make destroy```
 
-
-
 ## Test the CI/CD setup
 
 
@@ -147,13 +151,14 @@ Below are the Technology Products chosen to deliver this pilot Migration solutio
 
 ## Installation Steps
 
-> Installation of Wordpress Application requires the Infrastructure to be available to deploy the application. Below are the different stages of Application Installation and readiness.
+Below are the different stages of Application Installation and readiness.
 
-   1. [Infrasture Readiness](terraform/modules/networking/README.md)
+   1. [Network Setup](terraform/modules/networking/README.md)
    2. [Database Installation](terraform/modules/rds-aurora/README.md)
-   3. [Application Installation](terraform/modules/ecs/README.md)
-   4. [Securing Application](./docs/SSL-TLS.md)
-   5. [Logging and Alarming](./docs/LoggingandAlarming.md)
+   3. [Shared Storage Setup](terraform/modules/efs/README.md)
+   4. [Application Installation](terraform/modules/ecs/README.md)
+   5. [Securing Application](./docs/SSL-TLS.md)
+   6. [Logging and Alarming](./docs/LoggingandAlarming.md)
 
 
 # Deployment / Usage
@@ -195,14 +200,6 @@ To destroy all the AWS resources deployed as part of Terraform, execute below co
 # Application CICD / Automation
 
 Below are the steps to be followed to run automatic deployment of application cluster.
-
-#  Recommendations
-
-- Improvements
-
-
--  Features not delivered in this Phase
-
 
 # Resources
 
