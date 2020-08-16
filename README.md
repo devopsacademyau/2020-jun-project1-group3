@@ -117,7 +117,7 @@ Below are the Technology Products chosen to deliver this pilot Migration solutio
 
 
 
-## Deploy from your computer
+## Quick Deployment from your computer
 
 :warning: **This will deploy resources that are not entitled for AWS Free Tier and will incure a cost**
 
@@ -142,66 +142,99 @@ Below are the Technology Products chosen to deliver this pilot Migration solutio
 
 ## Test the CI/CD setup
 
+:warning: **This will deploy resources that are not entitled for AWS Free Tier and will incure a cost**
+
+- Fork the **devopsacademyau/2020-jun-project1-group3**
+- Add the following secrets into Github secrets of your forked repository.
+   - ```acm_cert_arn```
+   - ```AWS_ACCESS_KEY_ID```
+   - ```AWS_SECRET_ACCESS_KEY```
+   - ```domain_name```
+   - ```hosted_zone_id```
+   - ```ssh_allowed_cidr```
+   - ```tf_backend_bucket```
+
+- Clone the repo that is forked
+- Copy all the files from the ```actions``` folder into ```.github/workflow```. It will override some of the existing files which is the intended behaviour.
+- Add, Commit and Push the modifications to master of the forked repository
+- Now the forked repository is ready to be used with Github Actions
+
+### How to trigger CI/CD Deploy action
+- Go to root of the repository
+- Add a file named ```deploy```
+- Add, Commit and Push the new file to master of the forked repository
+- Check the Actions on your Github to see how actions are getting triggered
+- Check your AWS console to see how the deployment is progressing
+- Check your domain after about 10 minutes to see your new blog
+
+### How to trigger CI/CD Destroy action
+- Go to root of the repository
+- Add a file named ```destroy```
+- Add, Commit and Push the new file to master of the forked repository
+- Check the Actions on your Github to see how actions are getting triggered
+- Check your AWS console to see how your resources are getting deleted
+
+### The Real CI/CD automation
+- Create a policy on master branch to mandate at least one approval on PRs from someone that isn't an author
+- Change any file on terraform folder and push - Make Plan
+- PR the pushed file  - Make Apply
+- Change any file on docker folder and push - Make publish
+- PR the published file - Make deploy-wp - Wait a few minuites to see the container running.
+
+:warning: **Remember to destroy to avoid any cost**
 
 ## Tech Debt/ Things to improve
+- MTLS to make traffic flow secure end to end
+- Improve module level documentation
 
 ## More info
 
 <details>
 
-## Installation Steps
+## Deployment Steps in detail
+- Plan terraform from **terraform** folder
+
+   ```make plan```
+
+- Apply Terraform from **terraform** folder
+
+   ```make apply```
+
+- Obtain credentials to the Elastic Container Registry by executing below from **Docker** folder
+
+   ```make login```
+
+- Build Wordpress Container Image by executing below from **Docker** folder
+
+   ```make build```
+
+- Publish the docker image to ECS Registry by executing below from **Docker** folder
+
+   ```make publish```
+
+- Deploy with Updated image from **terraform** folder
+
+   ```make deploy-wp```
+
+:warning: **Remember to destroy to avoid any cost**
+
+- To destroy all the AWS resources deployed by terraform, execute below from repository ```root``` folder
+
+   ```make destroy```
+
+---
 
 Below are the different stages of Application Installation and readiness.
 
-   1. [Network Setup](terraform/modules/networking/README.md)
-   2. [Database Installation](terraform/modules/rds-aurora/README.md)
-   3. [Shared Storage Setup](terraform/modules/efs/README.md)
-   4. [Application Installation](terraform/modules/ecs/README.md)
-   5. [Securing Application](./docs/SSL-TLS.md)
-   6. [Logging and Alarming](./docs/LoggingandAlarming.md)
+- [Network Setup](terraform/modules/networking/README.md)
+- [Database Installation](terraform/modules/rds-aurora/README.md)
+- [Shared Storage Setup](terraform/modules/efs/README.md)
+- [Application Installation](terraform/modules/ecs/README.md)
+- [Securing Application](./docs/SSL-TLS.md)
+- [Logging and Alarming](./docs/LoggingandAlarming.md)
 
 
-# Deployment / Usage
-
-Requirements:
-
-* [Dockerfile](./terraform/docker/Makefile)
-
-* [Makefile](./terrform/Makefile)
-
-**Deployment Steps:**
-Execute the below steps to deploy the Application using Terraform Automation.
-
-1. Plan terraform deploy with container tag
->       make plan
-
-2. Apply Terraform to deploy the application.
->       make apply
-
-3. Login to the Elastic Container Registry.
->       make login
-
-4. Build Wordpress Container Image
->       make build
-
-5. Publish the docker image to ECS Registry - ECR
->       make publish
-
-6. Redeploy with Updated Image.
->       make deploy-wp
-
-
-To do the deployment in one go, just execute the below command and the above 6 steps will be automatically run to deploy the application.
->      make all
-
-To destroy all the AWS resources deployed as part of Terraform, execute below command.
->       make destroy
-
-# Application CICD / Automation
-
-Below are the steps to be followed to run automatic deployment of application cluster.
-
-# Resources
+# References
 
 [WORDPRESS BEST PRACTISE](https://aws.amazon.com/blogs/architecture/wordpress-best-practices-on-aws/)
 
