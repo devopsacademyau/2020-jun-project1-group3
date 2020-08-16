@@ -1,3 +1,26 @@
+## EFS Module
+
+## Parameters
+
+### Inputs
+
+- vpc_id
+- private_subnet_cidr
+- private_subnet_ids
+- efs_unique_name
+- efs_encrypted
+- efs_performance_mode
+- efs_throughput_mode
+- efs_access_point_path
+- efs_access_point_name
+
+### Outputs
+
+- efs_dns_name
+- efs_id
+- efs_access_point_id
+
+
 ## Objectives:
 
 - Use vpc from network stack
