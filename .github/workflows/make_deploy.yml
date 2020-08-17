@@ -1,18 +1,19 @@
 # This is a basic workflow to help you get started with Actions
-# This workflow triggers terraform plan when a PR with modifications on terraform directory is created
+# This file triggers the full deployment when a file called deploy is modified
 
-name: make_plan
+name: make_deploy
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  # push:
+  push:
+    paths:
+     - "deploy"
+  #  branches:
+  #   - "!master"
+  # pull_request:
   #   paths:
   #    - "terraform/**"
-  #   branches: [ master ]
-  pull_request:
-    paths:
-     - "terraform/**"
   #   branches: [ master ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -24,7 +25,8 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform
+        #working-directory:
+
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,7 +38,7 @@ jobs:
     #  run: echo Hello, world!
 
     # Runs a set of commands using the runners shell
-    - name: make_plan
+    - name: make_deploy
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -46,5 +48,4 @@ jobs:
         domain_name: ${{ secrets.DOMAIN_NAME }}
         acm_cert_arn: ${{ secrets.ACM_CERT_ARN }}
       run: |
-        make init
-        make plan
+        make deploy
